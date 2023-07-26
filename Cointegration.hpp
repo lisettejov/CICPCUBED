@@ -4,6 +4,7 @@
 #include <sstream>
 #include <ql/quantlib.hpp> // Include the QuantLib library
 
+//Quant Lib is a library used for modeling, trading
 using namespace QuantLib;
 using namespace std;
 
