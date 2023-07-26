@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ifstream>
+#include <ofstream>
 #include <fstream>
 #include <sstream>
 #include <vector>
