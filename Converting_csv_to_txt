@@ -1,0 +1,61 @@
+#include <iostream>
+#include <ifstream>
+#include <ofstream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+
+//namespace
+using namespace std;
+
+// Function to read data from the CSV file and store it in a vector of vectors
+vector<vector<string>> readCSV(const string& filename) {
+    vector<vector<string>> data;
+    ifstream inputFile('Mastercard data.numbers');
+    if (!inputFile) {
+        cerr << "Error opening the CSV file: " << filename << endl;
+        return data;
+    }
+
+    string line;
+    while (getline(inputFile, line)) {
+        vector<string> row;
+        stringstream ss(line);
+        string cell;
+        while (getline(ss, cell, ',')) {
+            row.push_back(cell);
+        }
+        data.push_back(row);
+    }
+
+    return data;
+}
+
+// Function to write data from the vector of vectors to a new TXT file
+void writeTXT(const string& filename, const vector<vector<string>>& data) {
+    ofstream outputFile(filename);
+    if (!outputFile) {
+        cerr << "Error creating/writing the TXT file: " << filename << endl;
+        return;
+    }
+
+    for (const vector<string>& row : data) {
+        for (const string& cell : row) {
+            outputFile << cell << " "; // You can adjust the separator as needed
+        }
+        outputFile << endl;
+    }
+}
+
+int main() {
+    string inputCSVFilename = "input.csv";
+    string outputTXTFilename = "output.txt";
+
+    // Read data from CSV file
+    vector<vector<string>> csvData = readCSV(inputCSVFilename);
+
+    // Write data to TXT file
+    writeTXT(outputTXTFilename, csvData);
+
+    return 0;
+}
